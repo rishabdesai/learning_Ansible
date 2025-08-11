@@ -1,0 +1,21 @@
+- name: configure web server
+  hosts: hosts
+  become: true
+
+
+  tasks:
+    - name: install apache2
+      apt:
+        name: apache2 
+        state: present
+
+    - name: start apache2 service
+      service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: add test website contents
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html

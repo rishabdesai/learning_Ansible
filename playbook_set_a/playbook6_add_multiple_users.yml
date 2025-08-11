@@ -1,0 +1,28 @@
+- name: create multiple users
+  hosts: all
+  become: true
+  vars:
+    # list of objects (user information)
+    users:
+      - name: user1
+        comment: comment1
+      - name: user2
+        comment: comment1      
+      - name: user3
+        comment: comment1      
+
+  tasks:
+    - name: create users
+      user:
+        name: '{{ item.name }}'
+        comment: '{{ item.comment }}'
+        groups: sudo
+        create_home: true
+        shell: /bin/bash
+
+      # for every user in users, perform above operation
+      with_items: '{{ users }}'
+
+    - name: set the password
+      raw: echo "{{ item.name }}:test" | sudo chpasswd
+      with_items: '{{ users }}'

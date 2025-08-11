@@ -1,0 +1,15 @@
+# name of playbook
+- name: demo playbook
+  hosts: hosts
+  become: true
+
+# list of tasks to be executed
+
+  tasks:
+  - name: create a file on master3
+    copy:
+      dest: /tmp/myfile.txt
+      content: |
+        this is a demo file created by ansible. 
+      mode: 0700      
+

@@ -1,0 +1,21 @@
+- name: delete multiple users
+  hosts: all
+  become: true
+  vars:
+    users:
+      - user1
+      - user2
+      - user3
+      - test3
+
+  tasks:
+    - name: delete users
+      user:
+        name: '{{ item }}'
+        state: absent
+      with_items: '{{ users }}'
+
+    - name: delete a groups
+      group: 
+        name: user123
+        state: absent
