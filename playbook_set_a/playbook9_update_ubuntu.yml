@@ -1,0 +1,11 @@
+- name: update ubuntu
+  hosts: all
+  become: true
+
+# list of tasks to be executed
+
+  tasks:
+  - name: update and upgrade apt packages
+    apt:
+      update_cache: yes
+      upgrade: yes
