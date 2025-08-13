@@ -1,0 +1,23 @@
+- name: Deploy Nginx Web server
+  hosts: all
+  become: yes
+
+  tasks: 
+    - name: Installing nginx web server
+      apt:
+        name: nginx
+        state: present
+
+    - name: make sure nginx service is running
+      service: 
+        name: nginx is running
+        state: started
+        enabled: true
+
+    - name: Deploy sample page
+      copy:
+        content: "<h1>Hello from Ansible, This is nginx web page</h1>"
+        dest: /var/www/html/index.html
+        mode: "0644"
+
+

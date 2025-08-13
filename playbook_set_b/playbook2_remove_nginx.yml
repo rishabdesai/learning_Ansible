@@ -1,0 +1,8 @@
+- name: delete web server
+  hosts: all
+  become: true
+  tasks:
+  - name: uninstall nginx
+    apt:
+      name: nginx
+      state: absent
